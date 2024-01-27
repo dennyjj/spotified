@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"time"
 
 	"github.com/joho/godotenv"
 	spotifyauth "github.com/zmb3/spotify/v2/auth"
@@ -47,7 +46,7 @@ func authHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, url)
 }
 
-type TokenResp struct {
+type Token struct {
 	AccessToken  string `json:"accessToken"`
 	RefreshToken string `json:"refreshToken"`
 	TokenType    string `json:"tokenType"`
@@ -62,7 +61,7 @@ func redirectHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	tokenJson, err := json.Marshal(TokenResp{
+	tokenJson, err := json.Marshal(Token{
 		AccessToken:  token.AccessToken,
 		RefreshToken: token.RefreshToken,
 		TokenType:    token.TokenType,
@@ -82,13 +81,6 @@ func redirectHandler(w http.ResponseWriter, r *http.Request) {
 	})
 
 	http.Redirect(w, r, "http://localhost:5173/", http.StatusFound)
-}
-
-type Token struct {
-	AccessToken  string    `json:"accessToken"`
-	RefreshToken string    `json:"refreshToken"`
-	TokenType    string    `json:"tokenType"`
-	Expiry       time.Time `json:"expiry"`
 }
 
 // func tokenHandler(w http.ResponseWriter, r *http.Request) {
