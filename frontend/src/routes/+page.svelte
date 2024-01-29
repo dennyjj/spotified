@@ -19,8 +19,8 @@
 
 				if (tokenObj.accessToken) {
 					try {
-						const data = await getSpotifyMe();
-						data.set(data);
+						const spotifyData = await getSpotifyMe();
+						data.set(spotifyData);
 					} catch (error) {
 						console.error('Failed to fetch data from Spotify', error);
 					}

@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/joho/godotenv"
 	spotifyauth "github.com/zmb3/spotify/v2/auth"
@@ -14,6 +15,7 @@ import (
 var (
 	state = "gdfg"
 	auth  *spotifyauth.Authenticator
+	port  = "8080"
 )
 
 func main() {
@@ -26,7 +28,7 @@ func main() {
 	http.Handle("/callback", corsMiddleware(http.HandlerFunc(redirectHandler)))
 	// http.Handle("/token", corsMiddleware(http.HandlerFunc(tokenHandler)))
 
-	err := http.ListenAndServe(":8080", nil)
+	err := http.ListenAndServe(":"+port, nil)
 	if err != nil {
 		log.Fatal("ListenAndServe: ", err)
 	}
@@ -34,7 +36,7 @@ func main() {
 
 func authHandler(w http.ResponseWriter, r *http.Request) {
 	auth = spotifyauth.New(
-		spotifyauth.WithRedirectURL("http://localhost:8080/callback"),
+		spotifyauth.WithRedirectURL(os.Getenv("SPOTIFY_OAUTH_REDIRECT_URL")),
 		spotifyauth.WithScopes(
 			spotifyauth.ScopeUserReadPrivate,
 			spotifyauth.ScopeUserModifyPlaybackState,
@@ -80,7 +82,7 @@ func redirectHandler(w http.ResponseWriter, r *http.Request) {
 		Path:  "/",
 	})
 
-	http.Redirect(w, r, "http://localhost:5173/", http.StatusFound)
+	http.Redirect(w, r, os.Getenv("FRONTEND_ROOT_URL"), http.StatusFound)
 }
 
 // func tokenHandler(w http.ResponseWriter, r *http.Request) {
