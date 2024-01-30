@@ -5,7 +5,7 @@ interface Token {
 	accessToken?: string;
 	refreshToken?: string;
 	tokenType?: string;
-	expiry?: Date;
+	expiry?: number;
 }
 
 export const token: PersistentStore<Token | null> = writable('token', null);
