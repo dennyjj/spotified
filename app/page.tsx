@@ -1,31 +1,18 @@
-'use client';
-import { signOut, useSession } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
+import { Suspense } from 'react';
 import Loading from './loading';
+import { getCurrentUserProfile } from './lib/data';
+import Logout from './ui/logout';
+import Me from './ui/Me';
 
-export default function Home() {
-  const router = useRouter();
-  const { data: session, status } = useSession({
-    required: true,
-    onUnauthenticated() {
-      router.push('/login');
-    },
-  });
-
-  const handleSignOut = () => {
-    signOut();
-  };
-
-  if (status === 'loading') {
-    return Loading();
-  }
+export default async function Page() {
+  const me = await getCurrentUserProfile();
 
   return (
     <div className="flex flex-col items-center justify-center h-screen w-screen">
-      <p>Signed in as {session!.user?.name}</p>
-      <button className="text-lime-500 lg" onClick={handleSignOut}>
-        Sign out
-      </button>
+      <Suspense fallback={<Loading />}>
+        <Me data={me} />
+      </Suspense>
+      <Logout />
     </div>
   );
 }
