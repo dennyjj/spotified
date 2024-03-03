@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
+import { SessionProvider } from 'next-auth/react';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import { SessionProvider } from 'next-auth/react';
+import { UiProvider } from './chakra-provider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -17,9 +18,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <SessionProvider>
-        <body className={inter.className}>{children}</body>
-      </SessionProvider>
+      <body className={inter.className}>
+        <UiProvider>
+          <SessionProvider>{children}</SessionProvider>
+        </UiProvider>
+      </body>
     </html>
   );
 }

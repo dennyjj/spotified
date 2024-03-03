@@ -6,7 +6,7 @@ export async function getCurrentUserProfile(): Promise<UserProfile> {
 
   const resp = await fetch('https://api.spotify.com/v1/me', {
     headers: {
-      Authorization: `Bearer ${session?.user.accessToken}`,
+      Authorization: `Bearer ${session!.accessToken}`,
     },
   });
 
