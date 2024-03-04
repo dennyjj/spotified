@@ -9,18 +9,16 @@ interface SpotifyTokenResponse {
 export default async function refreshAccessToken(refreshToken: string) {
   console.log(`refreshing token...`);
   try {
-    const url = 'https://accounts.spotify.com/api/token';
+    const url = process.env.SPOTIFY_API_TOKEN_URL!;
     const response = await fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
-        Authorization:
-          'Basic ' +
-          Buffer.from(
-            process.env.SPOTIFY_CLIENT_ID +
-              ':' +
-              process.env.SPOTIFY_CLIENT_SECRET
-          ).toString('base64'),
+        Authorization: `Basic ${Buffer.from(
+          process.env.SPOTIFY_CLIENT_ID +
+            ':' +
+            process.env.SPOTIFY_CLIENT_SECRET
+        ).toString('base64')}`,
       },
       body: new URLSearchParams({
         grant_type: 'refresh_token',
@@ -30,10 +28,14 @@ export default async function refreshAccessToken(refreshToken: string) {
 
     const refreshedToken: SpotifyTokenResponse = await response.json();
 
-    console.log('fetched refreshedToken: ', refreshedToken);
+    console.log(
+      `fetched refreshedToken, expires in ${getTokenExpiresAt(
+        refreshedToken.expires_in
+      )}`
+    );
     return {
       accessToken: refreshedToken.access_token,
-      expiresAt: Math.floor(Date.now() / 1000) + refreshedToken.expires_in,
+      expiresAt: getTokenExpiresAt(refreshedToken.expires_in),
       refreshToken: refreshedToken.refresh_token ?? refreshToken,
     };
   } catch (e) {
@@ -42,4 +44,12 @@ export default async function refreshAccessToken(refreshToken: string) {
       error: 'RefreshAccessTokenError' as const,
     };
   }
+}
+
+function getTokenExpiresAt(expiresIn: number): number {
+  return getCurrentUnixTimestampInSeconds() + expiresIn;
+}
+
+function getCurrentUnixTimestampInSeconds(): number {
+  return Math.floor(Date.now() / 1000);
 }

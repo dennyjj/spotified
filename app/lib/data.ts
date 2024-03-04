@@ -6,11 +6,11 @@ export async function getCurrentUserProfile(): Promise<UserProfile> {
   const session = await auth();
 
   if (session?.error === 'RefreshAccessTokenError') {
-    // can we use signIn here?
+    //TODO: can we use signIn here?
     signIn();
   }
 
-  const resp = await fetch('https://api.spotify.com/v1/me', {
+  const resp = await fetch(process.env.SPOTIFY_API_ME_URL!, {
     headers: {
       Authorization: `Bearer ${session!.accessToken}`,
     },
