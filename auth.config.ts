@@ -30,14 +30,8 @@ export const authConfig = {
       }
     },
 
-    async jwt({ token, user, account }) {
-      // FIXME: remove after debug
-      console.log('------');
-      console.log('user: ' + JSON.stringify(user));
-      console.log('account: ' + JSON.stringify(account));
-      console.log('now: ' + Date.now());
-      console.log('token.expiresAt: ' + (token.expiresAt as number) * 1000);
-      console.log('------');
+    async jwt({ token, account }) {
+      // FIXME: jwt callback rapid trigger issue
       if (account) {
         return {
           ...token,
@@ -47,12 +41,12 @@ export const authConfig = {
         };
       }
 
-      if (Date.now() < (token.expiresAt as number) * 1000) {
+      if (Date.now() < token.expiresAt! * 1000) {
         return token;
       } else {
         try {
           const { accessToken, expiresAt, refreshToken } =
-            await refreshAccessToken(token.refreshToken as string);
+            await refreshAccessToken(token.refreshToken!);
 
           return {
             ...token,

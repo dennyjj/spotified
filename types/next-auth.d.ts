@@ -6,3 +6,12 @@ declare module 'next-auth' {
     error?: 'RefreshAccessTokenError';
   }
 }
+
+declare module '@auth/core/jwt' {
+  interface JWT {
+    accessToken?: string;
+    expiresAt?: number;
+    refreshToken?: string;
+    error?: 'RefreshAccessTokenError';
+  }
+}
