@@ -27,6 +27,7 @@ export default async function refreshAccessToken(refreshToken: string) {
     });
 
     const refreshedToken: SpotifyTokenResponse = await response.json();
+    const {access_token, expires_in, refresh_token} = refreshedToken;
 
     console.log(
       `fetched refreshedToken, expires in ${getTokenExpiresAt(
@@ -34,9 +35,9 @@ export default async function refreshAccessToken(refreshToken: string) {
       )}`
     );
     return {
-      accessToken: refreshedToken.access_token,
-      expiresAt: getTokenExpiresAt(refreshedToken.expires_in),
-      refreshToken: refreshedToken.refresh_token ?? refreshToken,
+      accessToken: access_token,
+      expiresAt: getTokenExpiresAt(expires_in),
+      refreshToken: refreshedToken.refresh_token,
     };
   } catch (e) {
     console.log(e);

@@ -31,6 +31,9 @@ export const authConfig = {
     },
 
     async jwt({ token, account }) {
+      // FIXME: remove after debug
+      console.log('now: ' + Date.now());
+      console.log('token.expiresAt: ' + (token.expiresAt as number) * 1000);
       if (account) {
         return {
           accessToken: account.access_token,
@@ -41,7 +44,7 @@ export const authConfig = {
         return token;
       } else {
         try {
-          const { accessToken, refreshToken, expiresAt } =
+          const { accessToken, expiresAt, refreshToken } =
             await refreshAccessToken(token.refreshToken as string);
 
           return {
