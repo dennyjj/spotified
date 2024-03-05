@@ -7,7 +7,6 @@ interface SpotifyTokenResponse {
 }
 
 export default async function refreshAccessToken(refreshToken: string) {
-  console.log(`refreshing token...`);
   try {
     const url = process.env.SPOTIFY_API_TOKEN_URL!;
     const response = await fetch(url, {

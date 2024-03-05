@@ -41,13 +41,10 @@ export const authConfig = {
         };
       }
 
-      if (Date.now() < token.expiresAt! * 1000) {
-        return token;
-      } else {
+      if (Date.now() > token.expiresAt! * 1000) {
         try {
           const { accessToken, expiresAt, refreshToken } =
             await refreshAccessToken(token.refreshToken!);
-
           return {
             ...token,
             accessToken,
@@ -58,6 +55,8 @@ export const authConfig = {
           return { ...token, error: 'RefreshAccessTokenError' as const };
         }
       }
+
+      return token;
     },
 
     async session({ session, token }) {
