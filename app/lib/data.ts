@@ -1,13 +1,11 @@
 import { auth } from '@/auth';
 import { UserProfile } from './definitions';
-import { signIn } from 'next-auth/react';
+import { redirect } from 'next/navigation';
 
 export async function getCurrentUserProfile(): Promise<UserProfile> {
   const session = await auth();
-
   if (session?.error === 'RefreshAccessTokenError') {
-    //TODO: can we use signIn here?
-    signIn();
+    return redirect(`${process.env.NEXT_PUBLIC_VERCEL_URL!}/login`);
   }
 
   const resp = await fetch(process.env.SPOTIFY_API_ME_URL!, {

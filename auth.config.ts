@@ -30,17 +30,24 @@ export const authConfig = {
       }
     },
 
-    async jwt({ token, account }) {
+    async jwt({ token, user, account }) {
       // FIXME: remove after debug
+      console.log('------');
+      console.log('user: ' + JSON.stringify(user));
+      console.log('account: ' + JSON.stringify(account));
       console.log('now: ' + Date.now());
       console.log('token.expiresAt: ' + (token.expiresAt as number) * 1000);
+      console.log('------');
       if (account) {
         return {
+          ...token,
           accessToken: account.access_token,
           expiresAt: account.expires_at,
           refreshToken: account.refresh_token,
         };
-      } else if (Date.now() < (token.expiresAt as number) * 1000) {
+      }
+
+      if (Date.now() < (token.expiresAt as number) * 1000) {
         return token;
       } else {
         try {

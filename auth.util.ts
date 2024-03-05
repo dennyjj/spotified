@@ -26,18 +26,16 @@ export default async function refreshAccessToken(refreshToken: string) {
       }),
     });
 
-    const refreshedToken: SpotifyTokenResponse = await response.json();
-    const {access_token, expires_in, refresh_token} = refreshedToken;
+    const { access_token, expires_in, refresh_token }: SpotifyTokenResponse =
+      await response.json();
 
     console.log(
-      `fetched refreshedToken, expires in ${getTokenExpiresAt(
-        refreshedToken.expires_in
-      )}`
+      `fetched refreshedToken, expires in ${getTokenExpiresAt(expires_in)}`
     );
     return {
       accessToken: access_token,
       expiresAt: getTokenExpiresAt(expires_in),
-      refreshToken: refreshedToken.refresh_token,
+      refreshToken: refresh_token,
     };
   } catch (e) {
     console.log(e);
