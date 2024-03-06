@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import { SessionProvider } from 'next-auth/react';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { UiProvider } from './chakra-provider';
@@ -19,9 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <UiProvider>
-          <SessionProvider>{children}</SessionProvider>
-        </UiProvider>
+        <UiProvider>{children}</UiProvider>
       </body>
     </html>
   );
