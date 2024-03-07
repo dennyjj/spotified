@@ -41,22 +41,22 @@ export const authConfig = {
         };
       }
 
-      if (Date.now() > token.expiresAt! * 1000) {
-        try {
-          const { accessToken, expiresAt, refreshToken } =
-            await refreshAccessToken(token.refreshToken!);
-          return {
-            ...token,
-            accessToken,
-            expiresAt,
-            refreshToken,
-          };
-        } catch (e) {
-          return { ...token, error: 'RefreshAccessTokenError' as const };
-        }
+      if (Date.now() < token.expiresAt! * 1000) {
+        return token;
       }
 
-      return token;
+      try {
+        const { accessToken, expiresAt, refreshToken } =
+          await refreshAccessToken(token.refreshToken!);
+        return {
+          ...token,
+          accessToken,
+          expiresAt,
+          refreshToken,
+        };
+      } catch (e) {
+        return { ...token, error: 'RefreshAccessTokenError' as const };
+      }
     },
 
     async session({ session, token }) {

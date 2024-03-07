@@ -6,9 +6,5 @@ export default function Logout() {
     signOut();
   };
 
-  return (
-    <button className="text-lime-500 lg" onClick={handleLogOut}>
-      Logout
-    </button>
-  );
+  return <button onClick={handleLogOut}>Logout</button>;
 }

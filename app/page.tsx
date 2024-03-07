@@ -8,7 +8,7 @@ export default async function Page() {
   const me = await getCurrentUserProfile();
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen w-screen">
+    <div>
       <Suspense fallback={<Loading />}>
         <Me data={me} />
       </Suspense>
