@@ -7,10 +7,8 @@ export default function Page() {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen w-screen">
-      <button className="text-lime-500 lg" onClick={handleSignIn}>
-        Login by Spotify
-      </button>
+    <div>
+      <button onClick={handleSignIn}>Login by Spotify</button>
     </div>
   );
 }
