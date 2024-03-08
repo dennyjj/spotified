@@ -6,6 +6,8 @@ interface SpotifyTokenResponse {
   scope: string;
 }
 
+// FIXME: retrieve this logic back after authjs refresh token issue is fixed
+// reference: https://github.com/nextauthjs/next-auth/issues/7558
 export default async function refreshAccessToken(refreshToken: string) {
   try {
     const url = process.env.SPOTIFY_API_TOKEN_URL!;

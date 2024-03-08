@@ -1,6 +1,5 @@
 import { NextAuthConfig } from 'next-auth';
 import SpotifyProvider from 'next-auth/providers/spotify';
-import refreshAccessToken from './auth.util';
 
 const scopes =
   'user-read-recently-played user-read-playback-state user-top-read user-modify-playback-state user-read-currently-playing user-follow-read playlist-read-private user-read-email user-read-private user-library-read playlist-read-collaborative';
@@ -31,7 +30,6 @@ export const authConfig = {
     },
 
     async jwt({ token, account }) {
-      // FIXME: jwt callback rapid trigger issue
       if (account) {
         return {
           ...token,
@@ -41,29 +39,15 @@ export const authConfig = {
         };
       }
 
-      if (Date.now() < token.expiresAt! * 1000) {
-        return token;
-      }
-
-      try {
-        const { accessToken, expiresAt, refreshToken } =
-          await refreshAccessToken(token.refreshToken!);
-        return {
-          ...token,
-          accessToken,
-          expiresAt,
-          refreshToken,
-        };
-      } catch (e) {
-        return { ...token, error: 'RefreshAccessTokenError' as const };
-      }
+      return token;
     },
 
     async session({ session, token }) {
       return {
         ...session,
         accessToken: token.accessToken,
-        error: token.error,
+        expiresAt: token.expiresAt,
+        refreshToken: token.refreshToken,
       };
     },
   },

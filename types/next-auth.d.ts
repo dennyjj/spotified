@@ -3,7 +3,8 @@ import NextAuth, { DefaultSession } from 'next-auth';
 declare module 'next-auth' {
   interface Session {
     accessToken: string;
-    error?: 'RefreshAccessTokenError';
+    expiresAt: number;
+    refreshToken: string;
   }
 }
 
@@ -12,6 +13,5 @@ declare module '@auth/core/jwt' {
     accessToken?: string;
     expiresAt?: number;
     refreshToken?: string;
-    error?: 'RefreshAccessTokenError';
   }
 }
