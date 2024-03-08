@@ -1,8 +1,8 @@
-'use client';
 import Image from 'next/image';
-import { UserProfile } from '../lib/definitions';
+import { getCurrentUserProfile } from '../lib/data';
 
-export default function Me({ data }: { data: UserProfile }) {
+export default async function Me() {
+  const data = await getCurrentUserProfile();
   return (
     <>
       <div>
