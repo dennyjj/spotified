@@ -1,14 +1,19 @@
-'use client';
-import { signIn } from 'next-auth/react';
+import Typography from '@mui/material/Typography';
+import { Box } from '@mui/system';
 
 export default function Page() {
-  const handleSignIn = () => {
-    signIn('spotify', { callbackUrl: '/' });
-  };
-
   return (
-    <div>
-      <button onClick={handleSignIn}>Login by Spotify</button>
-    </div>
+    <Box
+      sx={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '90vh',
+      }}
+    >
+      <Typography align="center" variant="h4">
+        TAT
+      </Typography>
+    </Box>
   );
 }

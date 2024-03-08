@@ -1,7 +1,6 @@
 import { Suspense } from 'react';
 import Loading from './loading';
 import { getCurrentUserProfile } from './lib/data';
-import Logout from './ui/logout';
 import Me from './ui/me';
 
 export default async function Page() {
@@ -12,7 +11,6 @@ export default async function Page() {
       <Suspense fallback={<Loading />}>
         <Me data={me} />
       </Suspense>
-      <Logout />
     </div>
   );
 }
