@@ -52,7 +52,7 @@ function handleUnauthenticatedRequest(request: NextRequest) {
 }
 
 function getSessionTokenCookie() {
-  return process.env.NEXT_PUBLIC_VERCEL_URL?.startsWith('https://')
+  return process.env.BASE_URL?.startsWith('https://')
     ? '__Secure-authjs.session-token'
     : 'authjs.session-token';
 }
