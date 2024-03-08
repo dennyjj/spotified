@@ -5,7 +5,9 @@ import { UserProfile } from '../lib/definitions';
 export default function Me({ data }: { data: UserProfile }) {
   return (
     <>
-      <div>hello {data.display_name}</div>
+      <div>
+        <p> hello {data.display_name}</p>
+      </div>
       <Image
         src={data.images[1].url}
         alt="user spotify profile pic"
