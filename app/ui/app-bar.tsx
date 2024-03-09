@@ -1,10 +1,11 @@
 'use client';
+
+import AuthToggleButton from '@/app/ui/auth-toggle-button';
+import MeToggleButton from '@/app/ui/profile-toggle-button';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import { usePathname } from 'next/navigation';
-import AuthToggleButton from './auth-toggle-button';
-import MeToggleButton from './profile-toggle-button';
 
 export default function ButtonAppBar() {
   const pathname = usePathname();

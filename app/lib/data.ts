@@ -1,5 +1,5 @@
+import { UserProfile } from '@/app/lib/definitions';
 import { auth } from '@/auth';
-import { UserProfile } from './definitions';
 
 export async function getCurrentUserProfile(): Promise<UserProfile> {
   const session = await auth();

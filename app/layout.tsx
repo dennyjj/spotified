@@ -1,9 +1,10 @@
 'use client';
-import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
+
+import '@/app/globals.css';
+import theme from '@/app/theme';
+import ButtonAppBar from '@/app/ui/app-bar';
 import { ThemeProvider } from '@emotion/react';
-import './globals.css';
-import theme from './theme';
-import ButtonAppBar from './ui/app-bar';
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
 import CssBaseline from '@mui/material/CssBaseline';
 
 export default function RootLayout({
