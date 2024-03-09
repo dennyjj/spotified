@@ -8,6 +8,7 @@ export async function getCurrentUserProfile(): Promise<UserProfile> {
     headers: {
       Authorization: `Bearer ${session!.accessToken}`,
     },
+    next: { revalidate: 1800 },
   });
 
   return resp.json();
