@@ -13,3 +13,16 @@ export async function getCurrentUserProfile(): Promise<UserProfile> {
 
   return resp.json();
 }
+
+export async function getUserTopItems(type: 'artists' | 'tracks'): Promise<any> {
+  const session = await auth();
+
+  const resp = await fetch(`${process.env.SPOTIFY_API_TOP_ITEMS_URL!}/${type}`, {
+    headers: {
+      Authorization: `Bearer ${session!.accessToken}`,
+    },
+    next: { revalidate: 1800 },
+  });
+
+  return resp.json();
+}
