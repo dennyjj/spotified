@@ -1,7 +1,7 @@
 'use client';
 
 import AuthToggleButton from '@/app/ui/auth-toggle-button';
-import MeToggleButton from '@/app/ui/profile-toggle-button';
+import ProfileToggleButton from '@/app/ui/profile-toggle-button';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -13,7 +13,7 @@ export default function ButtonAppBar() {
   return (
     <AppBar position="sticky">
       <Toolbar>
-        {isLoginPage ? null : <MeToggleButton />}
+        {isLoginPage ? null : <ProfileToggleButton />}
         <Box sx={{ flexGrow: 1 }} />
         <AuthToggleButton authWording={isLoginPage ? 'Login' : 'Logout'} />
       </Toolbar>

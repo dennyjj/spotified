@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-export default function MeToggleButton() {
+export default function ProfileToggleButton() {
   const pathname = usePathname();
   const isProfilePage = pathname === '/profile';
   return (
