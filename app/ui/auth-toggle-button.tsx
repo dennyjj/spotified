@@ -8,7 +8,7 @@ export default function AuthToggleButton({
 }) {
   const handleClick = () => {
     if (authWording === 'Login') {
-      signIn('spotify', { callbackUrl: '/' });
+      signIn('spotify', { callbackUrl: '/dashboard' });
     } else {
       signOut();
     }

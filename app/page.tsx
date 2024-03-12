@@ -1,3 +1,4 @@
 export default async function Page() {
-  return <div></div>;
+  //FIXME: handle empty root page
+  return;
 }
