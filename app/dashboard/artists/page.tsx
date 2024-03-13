@@ -1,9 +1,9 @@
-import { getUserTopItems } from '@/app/lib/data';
+import { getUserTopArtists } from '@/app/lib/data';
 import { Typography } from '@mui/material';
 import Image from 'next/image';
 
 export default async function Page() {
-  const { items } = await getUserTopItems({ type: 'artists' });
+  const { items } = await getUserTopArtists();
   return items.map(({ id, name, images }) => {
     return (
       <>
