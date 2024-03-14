@@ -1,5 +1,5 @@
 import { getUserTopArtists } from '@/app/lib/data';
-import { Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import Image from 'next/image';
 
 export default async function Page() {
@@ -7,11 +7,12 @@ export default async function Page() {
   return items.map(({ id, name, images }) => {
     return (
       <>
-        <hr />
-        <div key={id}>
-          <Typography variant="h5">{name}</Typography>
-          <Image src={images[1].url} height={320} width={320} alt="artist image"></Image>
-        </div>
+        <Box key={id} sx={{ display: 'flex' }}>
+          <Image src={images[1].url} height={100} width={100} alt="artist image"></Image>
+          <Typography variant="h5" display="flex" alignItems="center" sx={{ ml: 1 }}>
+            {name}
+          </Typography>
+        </Box>
       </>
     );
   });

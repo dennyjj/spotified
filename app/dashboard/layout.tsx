@@ -1,3 +1,4 @@
+import { Box } from '@mui/material';
 import Link from 'next/link';
 
 export default function Layout({
@@ -7,12 +8,10 @@ export default function Layout({
 }>) {
   return (
     <div>
-      <div>
+      <Box sx={{ display: 'flex', justifyContent: 'space-evenly', my: 2 }}>
         <Link href="/dashboard/artists">Artists</Link>
-      </div>
-      <div>
         <Link href="/dashboard/tracks">Tracks</Link>
-      </div>
+      </Box>
       {children}
     </div>
   );
