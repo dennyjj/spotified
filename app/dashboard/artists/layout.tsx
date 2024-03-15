@@ -9,6 +9,7 @@ export default function Layout({
   return (
     <div>
       <Box sx={{ display: 'flex', justifyContent: 'space-evenly', my: 2 }}>
+        //TODO: move to common layout
         <Link href="/dashboard/artists/short-term">4 weeks</Link>
         <Link href="/dashboard/artists/medium-term">6 months</Link>
         <Link href="/dashboard/artists/long-term">lifetime</Link>
