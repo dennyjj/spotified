@@ -7,7 +7,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import Link from 'next/link';
 
-export default async function Profile({
+export default function Profile({
   displayName,
   email,
   followerNumber,
