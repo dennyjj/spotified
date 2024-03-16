@@ -2,7 +2,7 @@ import { ArtistTopItems, TrackTopItems, UserProfile } from '@/app/lib/definition
 import { auth } from '@/auth';
 import { match } from 'ts-pattern';
 
-type TimeRange = 'shortTerm' | 'mediumTerm' | 'longTerm';
+export type TimeRange = 'short-term' | 'medium-term' | 'long-term';
 type GetUserTopItemsParams = {
   type: 'artists' | 'tracks';
   timeRange?: TimeRange;
@@ -33,7 +33,7 @@ export async function getUserTopTracks(timeRange: TimeRange): Promise<TrackTopIt
 
 async function getUserTopItems<T extends GetUserTopItemsParams>({
   type,
-  timeRange = 'mediumTerm',
+  timeRange = 'medium-term',
   limit = 20,
   offset = 0,
 }: T): Promise<T['type'] extends 'artists' ? ArtistTopItems : TrackTopItems> {
@@ -41,9 +41,9 @@ async function getUserTopItems<T extends GetUserTopItemsParams>({
 
   const resp = await fetch(
     `${process.env.SPOTIFY_API_TOP_ITEMS_URL!}/${type}?time_range=${match(timeRange)
-      .with('shortTerm', () => 'short_term')
-      .with('mediumTerm', () => 'medium_term')
-      .with('longTerm', () => 'long_term')
+      .with('short-term', () => 'short_term')
+      .with('medium-term', () => 'medium_term')
+      .with('long-term', () => 'long_term')
       .exhaustive()}&limit=${limit}&offset=${offset}`,
     {
       headers: {

@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import Link from 'next/link';
 
 export default function Layout({
@@ -9,8 +9,12 @@ export default function Layout({
   return (
     <div>
       <Box sx={{ display: 'flex', justifyContent: 'space-evenly', my: 2 }}>
-        <Link href="/dashboard/artists">Artists</Link>
-        <Link href="/dashboard/tracks">Tracks</Link>
+        <Button variant="contained">
+          <Link href="/dashboard/artists/medium-term">Artists</Link>
+        </Button>
+        <Button variant="contained">
+          <Link href="/dashboard/tracks/medium-term">Tracks</Link>
+        </Button>
       </Box>
       {children}
     </div>
