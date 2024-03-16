@@ -2,11 +2,10 @@ import { getUserTopTracks } from '@/app/lib/data';
 import TrackItem from '@/app/ui/track-item';
 
 export default async function Page() {
-  const { items } = await getUserTopTracks('mediumTerm');
+  const { items } = await getUserTopTracks('longTerm');
   return items.map(({ id, name, album, artists }) => {
     return (
       <>
-        <hr />
         <TrackItem
           id={id}
           trackName={name}

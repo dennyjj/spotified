@@ -1,9 +1,11 @@
 import { ArtistTopItems, TrackTopItems, UserProfile } from '@/app/lib/definitions';
 import { auth } from '@/auth';
+import { match } from 'ts-pattern';
 
+type TimeRange = 'shortTerm' | 'mediumTerm' | 'longTerm';
 type GetUserTopItemsParams = {
   type: 'artists' | 'tracks';
-  timeRange?: 'long_term' | 'medium_term' | 'short_term';
+  timeRange?: TimeRange;
   limit?: number;
   offset?: number;
 };
@@ -21,24 +23,28 @@ export async function getCurrentUserProfile(): Promise<UserProfile> {
   return resp.json();
 }
 
-export async function getUserTopArtists(): Promise<ArtistTopItems> {
-  return getUserTopItems({ type: 'artists' });
+export async function getUserTopArtists(timeRange: TimeRange): Promise<ArtistTopItems> {
+  return getUserTopItems({ type: 'artists', timeRange });
 }
 
-export async function getUserTopTracks(): Promise<TrackTopItems> {
-  return getUserTopItems({ type: 'tracks' });
+export async function getUserTopTracks(timeRange: TimeRange): Promise<TrackTopItems> {
+  return getUserTopItems({ type: 'tracks', timeRange });
 }
 
 async function getUserTopItems<T extends GetUserTopItemsParams>({
   type,
-  timeRange = 'medium_term',
+  timeRange = 'mediumTerm',
   limit = 20,
   offset = 0,
 }: T): Promise<T['type'] extends 'artists' ? ArtistTopItems : TrackTopItems> {
   const session = await auth();
 
   const resp = await fetch(
-    `${process.env.SPOTIFY_API_TOP_ITEMS_URL!}/${type}?time_range=${timeRange}&limit=${limit}&offset=${offset}`,
+    `${process.env.SPOTIFY_API_TOP_ITEMS_URL!}/${type}?time_range=${match(timeRange)
+      .with('shortTerm', () => 'short_term')
+      .with('mediumTerm', () => 'medium_term')
+      .with('longTerm', () => 'long_term')
+      .exhaustive()}&limit=${limit}&offset=${offset}`,
     {
       headers: {
         Authorization: `Bearer ${session!.accessToken}`,

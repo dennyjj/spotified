@@ -6,7 +6,6 @@ export default async function Page() {
   return items.map(({ id, name, album, artists }) => {
     return (
       <>
-        <hr />
         <TrackItem
           id={id}
           trackName={name}
