@@ -8,6 +8,7 @@ export default function TopItemFooter({ itemType }: { itemType: 'artists' | 'tra
         position: 'fixed',
         bottom: 0,
         flexDirection: 'row',
+        justifyContent: 'space-evenly',
         width: '100%',
         bgcolor: 'primary.main',
       }}

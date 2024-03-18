@@ -9,9 +9,10 @@ export default async function Page({ params }: { params: { id: string } }) {
   }
 
   const { items } = await getUserTopTracks(id as TimeRange);
-  return items.map(({ name, album, artists }) => {
+  return items.map(({ id, name, album, artists }) => {
     return (
       <TrackItem
+        key={id}
         trackName={name}
         albumImageUrl={album.images[1].url}
         albumName={album.name}

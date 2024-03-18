@@ -9,7 +9,7 @@ export default async function Page({ params }: { params: { id: string } }) {
   }
 
   const { items } = await getUserTopArtists(id as TimeRange);
-  return items.map(({ name, images }) => {
-    return <ArtistItem imageUrl={images[1].url} name={name} />;
+  return items.map(({ id, name, images }) => {
+    return <ArtistItem key={id} imageUrl={images[1].url} name={name} />;
   });
 }
