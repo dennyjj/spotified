@@ -1,5 +1,4 @@
-import { Box, Button } from '@mui/material';
-import Link from 'next/link';
+import TopItemFooter from '@/app/ui/top-item-footer';
 
 export default function Layout({
   children,
@@ -8,19 +7,11 @@ export default function Layout({
 }>) {
   return (
     <div>
-      <Box sx={{ display: 'flex', justifyContent: 'space-evenly', my: 2 }}>
-        {/* TODO: move to common layout */}
-        <Link href="/artists/short-term">
-          <Button variant="contained">4 weeks</Button>
-        </Link>
-        <Link href="/artists/medium-term">
-          <Button variant="contained">6 months</Button>
-        </Link>
-        <Link href="/artists/long-term">
-          <Button variant="contained">lifetime</Button>
-        </Link>
-      </Box>
       {children}
+      {/* FIXME: spacing between children and footer */}
+      <br />
+      <br />
+      <TopItemFooter itemType="artists" />
     </div>
   );
 }

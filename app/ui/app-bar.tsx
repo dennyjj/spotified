@@ -1,5 +1,3 @@
-'use client';
-
 import AppBarLinkButton from '@/app/ui/app-bar-link-button';
 import AuthToggleButton from '@/app/ui/auth-toggle-button';
 import FlexGrowBox from '@/app/ui/flex-grow-box';
