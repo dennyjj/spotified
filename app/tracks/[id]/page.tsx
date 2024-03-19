@@ -2,13 +2,17 @@ import { TimeRange, getUserTopTracks } from '@/app/lib/data';
 import TrackItem from '@/app/ui/track-item';
 import { notFound } from 'next/navigation';
 
+function isTimeRange(value: string): value is TimeRange {
+  return ['short-term', 'medium-term', 'long-term'].includes(value);
+}
+
 export default async function Page({ params }: { params: { id: string } }) {
   const { id } = params;
-  if (!['short-term', 'medium-term', 'long-term'].includes(id)) {
+  if (!isTimeRange(id)) {
     notFound();
   }
 
-  const { items } = await getUserTopTracks(id as TimeRange);
+  const { items } = await getUserTopTracks(id);
   return items.map(({ id, name, album, artists }) => {
     return (
       <TrackItem
