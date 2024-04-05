@@ -11,8 +11,8 @@ export default function Page() {
         height: '90vh',
       }}
     >
-      <Typography align="center" variant="h4">
-        TAT
+      <Typography align="center" variant="h5">
+        Please Login
       </Typography>
     </Box>
   );

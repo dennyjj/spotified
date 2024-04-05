@@ -14,7 +14,7 @@ export default function AppBarLinkButton({
   const pathname = usePathname();
   return (
     <Link href={href}>
-      <Button color={pathname.startsWith(href) ? 'success' : 'secondary'}>{title}</Button>
+      <Button color={pathname.split('/')[1] === href.split('/')[1] ? 'success' : 'secondary'}>{title}</Button>
     </Link>
   );
 }
