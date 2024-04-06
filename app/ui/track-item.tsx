@@ -15,12 +15,11 @@ export default function TrackItem({
   return (
     <>
       <Stack display="flex" direction="row">
-        <Image src={albumImageUrl} height={70} width={70} alt="album image"></Image>
+        <Image src={albumImageUrl} height={90} width={90} alt="album image"></Image>
         <Stack justifyContent="center" sx={{ ml: 1 }}>
           <Typography>{trackName}</Typography>
-          <Typography>
-            {albumName} - {artistName}
-          </Typography>
+          <Typography>{artistName}</Typography>
+          <Typography>{albumName}</Typography>
         </Stack>
       </Stack>
     </>
