@@ -13,7 +13,7 @@ export default async function Page({ params }: { params: { id: string } }) {
   }
 
   const { items } = await getUserTopArtists(id);
-  return items.map(({ id, name, images }) => {
-    return <ArtistItem key={id} imageUrl={images[1].url} name={name} />;
+  return items.map(({ id, name, images, external_urls }) => {
+    return <ArtistItem key={id} imageUrl={images[1].url} name={name} externalUrl={external_urls.spotify} />;
   });
 }

@@ -13,7 +13,7 @@ export default async function Page({ params }: { params: { id: string } }) {
   }
 
   const { items } = await getUserTopTracks(id);
-  return items.map(({ id, name, album, artists }) => {
+  return items.map(({ id, name, album, artists,external_urls }) => {
     return (
       <TrackItem
         key={id}
@@ -21,6 +21,7 @@ export default async function Page({ params }: { params: { id: string } }) {
         albumImageUrl={album.images[1].url}
         albumName={album.name}
         artistName={artists[0].name}
+        externalUrl={external_urls.spotify}
       />
     );
   });
