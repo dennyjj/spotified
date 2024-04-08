@@ -5,11 +5,11 @@ import Link from 'next/link';
 export default function ArtistItem({
   imageUrl,
   name,
-  externalUrl,
+  artistUrl,
 }: {
   imageUrl: string;
   name: string;
-  externalUrl: string;
+  artistUrl: string;
 }) {
   return (
     <Stack
@@ -17,7 +17,7 @@ export default function ArtistItem({
       direction="row"
       justifyContent="center"
       component={Link}
-      href={externalUrl}
+      href={artistUrl}
       sx={{ textDecoration: 'none', color: 'inherit' }}
     >
       <Image src={imageUrl} height={90} width={90} alt="artist image" />

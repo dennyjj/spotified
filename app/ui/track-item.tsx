@@ -7,20 +7,20 @@ export default function TrackItem({
   trackName,
   albumName,
   artistName,
-  externalUrl,
+  trackUrl,
 }: {
   albumImageUrl: string;
   trackName: string;
   albumName: string;
   artistName: string;
-  externalUrl: string;
+  trackUrl: string;
 }) {
   return (
     <Stack
       display="flex"
       direction="row"
       component={Link}
-      href={externalUrl}
+      href={trackUrl}
       sx={{ textDecoration: 'none', color: 'inherit' }}
     >
       <Image src={albumImageUrl} height={90} width={90} alt="album image"></Image>

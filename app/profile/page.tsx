@@ -9,7 +9,7 @@ export default async function Page() {
       email={email}
       followerNumber={followers.total}
       profileImage={images[1].url}
-      profileLink={external_urls.spotify}
+      profileUrl={external_urls.spotify}
     />
   );
 }
