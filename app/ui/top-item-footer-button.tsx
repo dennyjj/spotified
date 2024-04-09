@@ -7,7 +7,7 @@ export default function TopItemFooterButton({ href, text }: { href: string; text
   const pathname = usePathname();
   return (
     <Container sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center' }}>
-      <Button variant="text" color={href === pathname ? 'secondary' : 'inherit'} href={href}>
+      <Button variant="text" color={href === pathname ? 'success' : 'secondary'} href={href}>
         {text}
       </Button>
     </Container>
