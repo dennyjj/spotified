@@ -8,13 +8,11 @@ import Link from 'next/link';
 
 export default function Profile({
   displayName,
-  email,
   followerNumber,
   profileImage,
   profileUrl,
 }: {
   displayName: string;
-  email: string;
   followerNumber: number;
   profileImage: string;
   profileUrl: string;
@@ -28,10 +26,7 @@ export default function Profile({
             {displayName}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {email}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {followerNumber} {followerNumber > 1 ? 'followers' : 'follower'}
+            {followerNumber} {'follower' + (followerNumber > 1 ? 's' : '')}
           </Typography>
         </CardContent>
       </Card>
