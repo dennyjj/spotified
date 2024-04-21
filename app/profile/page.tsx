@@ -6,7 +6,7 @@ export default async function Page() {
   return (
     <Profile
       displayName={display_name}
-      followerNumber={followers.total}
+      totalFollowers={followers.total}
       profileImage={images[1].url}
       profileUrl={external_urls.spotify}
     />
