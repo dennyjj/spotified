@@ -38,3 +38,6 @@ next-env.d.ts
 
 # storybook
 TODO.md
+
+# vscode
+.vscode
