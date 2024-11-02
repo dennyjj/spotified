@@ -5,7 +5,7 @@ import SpotifyProvider from 'next-auth/providers/spotify';
 // const scopes =
 //   'user-read-recently-played user-read-playback-state user-top-read user-modify-playback-state user-read-currently-playing user-follow-read playlist-read-private user-read-email user-read-private user-library-read playlist-read-collaborative';
 
-const scopes = ['user-read-email', 'user-top-read'];
+const scopes = ['user-read-email', 'user-read-private', 'user-top-read'];
 
 export const authConfig = {
   pages: {
@@ -15,7 +15,11 @@ export const authConfig = {
     SpotifyProvider({
       clientId: process.env.SPOTIFY_CLIENT_ID!,
       clientSecret: process.env.SPOTIFY_CLIENT_SECRET!,
-      authorization: `https://accounts.spotify.com/authorize?scope=${scopes.join(',')}`,
+      authorization: {
+        params: {
+          scope: scopes.join(' '),
+        },
+      },
     }),
   ],
   callbacks: {
@@ -31,6 +35,9 @@ export const authConfig = {
     },
 
     async jwt({ token, account }) {
+      console.log('JWT Callback - Account:', account);
+      console.log('JWT Callback - Token:', token);
+
       if (account) {
         return {
           ...token,
