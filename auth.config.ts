@@ -21,6 +21,32 @@ export const authConfig = {
         },
       },
       allowDangerousEmailAccountLinking: true,
+      token: {
+        url: 'https://accounts.spotify.com/api/token',
+        async request(context: any) {
+          const { provider, params } = context;
+          const response = await fetch(provider.token.url!, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+              'Authorization': `Basic ${Buffer.from(`${provider.clientId}:${provider.clientSecret}`).toString('base64')}`,
+            },
+            body: new URLSearchParams({
+              grant_type: 'authorization_code',
+              code: params.code!,
+              redirect_uri: params.redirect_uri!,
+            }),
+          });
+          
+          const text = await response.text();
+          try {
+            return JSON.parse(text);
+          } catch (error) {
+            console.error('Spotify token response:', text);
+            throw new Error(`Invalid JSON response from Spotify: ${text.substring(0, 100)}`);
+          }
+        },
+      },
     }),
   ],
   callbacks: {
