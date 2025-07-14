@@ -6,6 +6,7 @@ const scopes =
 
 export const authConfig = {
   trustHost: true,
+  debug: true,
   pages: {
     signIn: '/login',
   },
@@ -16,8 +17,10 @@ export const authConfig = {
       authorization: {
         params: {
           scope: scopes,
+          show_dialog: 'true',
         },
       },
+      allowDangerousEmailAccountLinking: true,
     }),
   ],
   callbacks: {
