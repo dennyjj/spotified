@@ -5,6 +5,7 @@ const scopes =
   'user-read-recently-played user-read-playback-state user-top-read user-modify-playback-state user-read-currently-playing user-follow-read playlist-read-private user-read-email user-read-private user-library-read playlist-read-collaborative';
 
 export const authConfig = {
+  trustHost: true,
   pages: {
     signIn: '/login',
   },
@@ -12,7 +13,11 @@ export const authConfig = {
     SpotifyProvider({
       clientId: process.env.SPOTIFY_CLIENT_ID!,
       clientSecret: process.env.SPOTIFY_CLIENT_SECRET!,
-      authorization: `https://accounts.spotify.com/authorize?scope=${scopes.split(' ').join(',')}`,
+      authorization: {
+        params: {
+          scope: scopes,
+        },
+      },
     }),
   ],
   callbacks: {
