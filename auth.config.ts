@@ -16,7 +16,7 @@ export const authConfig = {
       clientSecret: process.env.SPOTIFY_CLIENT_SECRET!,
       authorization: {
         params: {
-          scope: scopes,
+          scope: scopes.split(' ').join(','),
           show_dialog: 'true',
         },
       },
