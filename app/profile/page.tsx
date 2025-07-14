@@ -7,7 +7,7 @@ export default async function Page() {
     <Profile
       displayName={display_name}
       totalFollowers={followers.total}
-      profileImage={images[1].url}
+      profileImage={images?.[0]?.url || '/default-avatar.png'}
       profileUrl={external_urls.spotify}
     />
   );
