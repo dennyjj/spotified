@@ -1,5 +1,6 @@
 import AppBarLinkButton from '@/app/ui/app-bar-link-button';
 import AuthToggleButton from '@/app/ui/auth-toggle-button';
+import DarkModeToggle from '@/app/ui/dark-mode-toggle';
 import FlexGrowBox from '@/app/ui/flex-grow-box';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -22,6 +23,7 @@ export default function ButtonAppBar() {
         ) : (
           <AppBarLinkButton href="/tracks/medium-term" title="Top Tracks" />
         )}
+        <DarkModeToggle />
         <AuthToggleButton authWording={isLoginPage ? 'Login' : 'Logout'} />
       </Toolbar>
     </AppBar>

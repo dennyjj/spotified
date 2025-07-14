@@ -1,9 +1,8 @@
 'use client';
 
 import '@/app/globals.css';
-import theme from '@/app/theme';
 import ButtonAppBar from '@/app/ui/app-bar';
-import { ThemeProvider } from '@emotion/react';
+import ThemeProvider from '@/app/lib/theme-context';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
 import CssBaseline from '@mui/material/CssBaseline';
 
@@ -16,7 +15,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <AppRouterCacheProvider options={{ enableCssLayer: true }}>
-          <ThemeProvider theme={theme}>
+          <ThemeProvider>
             <CssBaseline />
             <ButtonAppBar />
             {children}

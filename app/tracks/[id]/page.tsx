@@ -20,7 +20,7 @@ export default async function Page({ params }: { params: { id: string } }) {
         trackName={name}
         albumImageUrl={album.images[1].url}
         albumName={album.name}
-        artistName={artists[0].name}
+        artistName={artists.map(artist => artist.name).join(', ')}
         trackUrl={external_urls.spotify}
       />
     );
