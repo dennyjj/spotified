@@ -23,7 +23,7 @@ Live demo: [Spotified](https://spotified-blue.vercel.app/)
   - All time (lifetime)
 - **Responsive Design**: Works on desktop and mobile devices
 
-## Technology Stack
+## Tech Stack
 
 - **Frontend**: React.js, Next.js 14, Material UI
 - **Authentication**: NextAuth.js v5 (Beta)
